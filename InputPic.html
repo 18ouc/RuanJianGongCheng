@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Knowing Bird</title>
+<style type="text/css">
+	/*标签选择器*/
+	div{
+		height:32px;
+		width:245px;
+	}
+	/*类选择器*/
+	.content{
+		margin:0 auto;/*自动居中*/
+		border:3px solid #e7d322;
+		height:100px;
+		width:245px;
+		background-color:#e6b688;
+		padding-top:10px;
+		padding-left:10px;
+		text-align:center
+	}
+</style>
+<form action="BirdServlet" method="post"><!-- 消息体 -->
+	<div class="content">
+	 <div>
+		上传图片：<input class="style_file_content" accept=".jpg" type="file" name="bird" id="bird"/>
+	 </div>
+		<br><input type="submit" value="提交">
+	</div>		
+</form>
+</head>
+<body>
+	
+</body>
+</html>
