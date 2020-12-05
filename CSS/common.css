@@ -1,9 +1,19 @@
 
 body{ background-color: rgb(40,41,35); }
+
+#head{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 #up_file_f{
-	background-color: rgb(200,200,200);
+	//background-color: rgb(200,200,200);
 }
 
+#footer{
+	position: absolute;
+	float: bottom;
+	color: white;
+}
 #view{
 	width: 100px;
 	height: 100px;

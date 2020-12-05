@@ -2,79 +2,90 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Knowing Bird</title>
-	<link rel="stylesheet" href="./layui/css/layui.css">
-	<link rel="stylesheet" href="./CSS/common.css">
-	
+    <meta charset="UTF-8">
+    <title>Knowing Bird</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <link rel="stylesheet" href="./CSS/common.css">
+
 </head>
 
 
 <body>
 
-	<div class="layui-col-md6 layui-col-md-offset3">
-		
- 
-<blockquote class="layui-elem-quote">我是描述我是描述我是描述我是描述我是描述我是描述我是描述我是描述</blockquote>
-		<div class="layui-card">
-			<div class="layui-card-header">鸟类识别</div>
-			<div class="layui-card-body">
-				<div id="up_file_f" >
+<!--桌面浏览器居中显示-->
+<div class="layui-col-md6 layui-col-md-offset3">
 
-					<div class="layui-upload">
-						<button type="button" class="layui-btn" id="test1">上传图片</button><input class="layui-upload-file" type="file" accept="" name="file">
-						<div class="layui-upload-list">
-							<img class="layui-upload-img" id="view">
-							<p id="demoText"></p>
-						</div>
-					</div>
+    <div id="head">
+        <div class="layui-card">
+            <div class="layui-card-header"><h1>什么鸟？</h1></div>
+            <div class="layui-card-body">
+
+            </div>
+        </div>
+    </div>
+
+    <blockquote class="layui-elem-quote">我是描述我是描述我是描述我是描述我是描述我是描述我是描述我是描述</blockquote>
+    <div class="layui-card">
+        <div class="layui-card-header">鸟类识别</div>
+        <div class="layui-card-body">
+            <div id="up_file_f">
+
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="upload_btn">上传图片</button>
+                    <input class="layui-upload-file" type="file" accept="" name="file">
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="view">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
 
 
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
+    <div id="footer">
+        Copyright  ©  2020 by Software Engineering Group x
+    </div>
+</div>
+<!--end 桌面浏览器居中显示-->
 
-	
-	
 </body>
 <script type="text/javascript" src="./layui/layui.js"></script>
 <script>
-	layui.use('upload', function(){
-		var $ = layui.jquery
-		,upload = layui.upload;
+    layui.use('upload', function () {
+        var $ = layui.jquery
+            , upload = layui.upload;
 
-  //普通图片上传
-  var uploadInst = upload.render({
-  	elem: '#test1'
-    ,url: 'https://xxxxxxx.com/post' //改成您自己的上传接口
-    ,before: function(obj){
-      //预读本地文件示例，不支持ie8
-      obj.preview(function(index, file, result){
-        $('#demo1').attr('src', result); //图片链接（base64）
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#upload_btn'
+            , url: 'https://xxxxxxx.com/post' //改成您自己的上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#view').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+
+
     });
-  }
-  ,done: function(res){
-      //如果上传失败
-      if(res.code > 0){
-      	return layer.msg('上传失败');
-      }
-      //上传成功
-  }
-  ,error: function(){
-      //演示失败状态，并实现重传
-      var demoText = $('#demoText');
-      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-      demoText.find('.demo-reload').on('click', function(){
-      	uploadInst.upload();
-      });
-  }
-});
-  
-
-  
-});
 </script>
 
 </html>
