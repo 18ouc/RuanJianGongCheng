@@ -1,2 +1,4 @@
-# RuanJianGongCheng
-### HELLO WORLD!!!!
+# 软件工程 分支2
+## 相对于主分支：
+- 改了点主页
+- 使用了一个前端框架
