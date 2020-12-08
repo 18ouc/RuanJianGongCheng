@@ -2,10 +2,11 @@
 <html>
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <title>Knowing Bird</title>
-    <link rel="stylesheet" href="./layui/css/layui.css">
-    <link rel="stylesheet" href="./CSS/common.css">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static "layui/css/layui.css" %} ">
+    <link rel="stylesheet" href="{% static "CSS/common.css" %}">
 
 </head>
 
@@ -13,20 +14,20 @@
 <body>
 
 <!--桌面浏览器居中显示-->
-<div class="layui-col-md6 layui-col-md-offset3">
+<div id="main" class="layui-col-md6 layui-col-md-offset3">
 
     <div id="head">
         <div class="layui-card">
-            <div class="layui-card-header"><h1>什么鸟？</h1></div>
+            <div class="layui-card-header"><h1>{{app_name}}</h1></div>
             <div class="layui-card-body">
 
             </div>
         </div>
     </div>
 
-    <blockquote class="layui-elem-quote">我是描述我是描述我是描述我是描述我是描述我是描述我是描述我是描述</blockquote>
+    <blockquote class="layui-elem-quote">{{decription}}</blockquote>
     <div class="layui-card">
-        <div class="layui-card-header">鸟类识别</div>
+        <div class="layui-card-header">{{upload_titie}}</div>
         <div class="layui-card-body">
             <div id="up_file_f">
 
@@ -35,7 +36,7 @@
                     <input class="layui-upload-file" type="file" accept="" name="file">
                     <div class="layui-upload-list">
                         <img class="layui-upload-img" id="view">
-                        <p id="demoText"></p>
+                        <p id="info"></p>
                     </div>
                 </div>
 
@@ -45,13 +46,15 @@
     </div>
 
     <div id="footer">
+
+        <img  id="icon" src="{% static "/layui/images/face/44.gif" %}">
         Copyright  ©  2020 by Software Engineering Group x
     </div>
 </div>
 <!--end 桌面浏览器居中显示-->
 
 </body>
-<script type="text/javascript" src="./layui/layui.js"></script>
+<script type="text/javascript" src="{% static "layui/layui.js"  %}"></script>
 <script>
     layui.use('upload', function () {
         var $ = layui.jquery
@@ -60,7 +63,7 @@
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#upload_btn'
-            , url: 'https://xxxxxxx.com/post' //改成您自己的上传接口
+            , url: 'http://127.0.0.1:8000/post/' //改成您自己的上传接口
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
@@ -72,13 +75,15 @@
                 if (res.code > 0) {
                     return layer.msg('上传失败');
                 }
-                //上传成功
+                if (res.code == 0){
+                   $('#info').html('<p>'+res.data["kind"]+'</p>' +'<p>'+res.data["name"]+'</p>' );
+                }
             }
             , error: function () {
                 //演示失败状态，并实现重传
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function () {
+                var info = $('#info');
+                info.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                info.find('.demo-reload').on('click', function () {
                     uploadInst.upload();
                 });
             }

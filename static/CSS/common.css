@@ -1,5 +1,13 @@
 
-body{ background-color: rgb(40,41,35); }
+body,html{
+	background-color: rgb(40,41,35);
+	height: 100%;
+}
+#main{
+	//background-image: url("../layui/images/face/12.gif");
+	//background-repeat: repeat;
+	height: 100%;
+}
 
 #head{
 	margin-top: 10px;
