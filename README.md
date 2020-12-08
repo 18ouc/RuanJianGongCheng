@@ -20,7 +20,7 @@ pip install Django
 ### 部署方法
 
 ```
-git clone -b sparrow https://github.com/18ouc/RuanJianGongCheng.git
+git clone  https://github.com/18ouc/RuanJianGongCheng.git
 cd RuanJianGongCheng
 python manage.py runserver 8000
 ```
